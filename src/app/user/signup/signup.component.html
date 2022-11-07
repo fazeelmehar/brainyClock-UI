@@ -1,0 +1,67 @@
+<div [ngClass]="{'sign-up-translate-0': isShow}" class="sign-up" id="sign-up">
+  <div class="">
+      <button (click)="Close()" class="page-remover border-0 bg-white p-1 back-btn">
+          <img src="assets/images/cross.png" alt="" class="cross-img w-100">
+          <img src="assets/images/back.png" alt="" class="back-img w-100">
+      </button>
+
+      <div class="row">
+          <div class="col-lg-5 col-12">
+              <div class="h-100 secure" style="padding-left: 40px;">
+                  <div class="row h-100 align-items-center">
+                      <div class="col">
+                          <h2 class="secure">
+                              Secure. <br>
+                              Contactless. <br>
+                              Accurate. <br>
+                          </h2>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-6 col-12">
+              <div class="sign-up-container">
+                  <h2 class="sign-up-header">
+                      Create your account
+                  </h2>
+
+                  <form action="">
+                      <div class="input-div">
+                          <label for="">First name</label>
+                          <input class="w-100" type="text" placeholder="John">
+                      </div>
+                      <div class="input-div">
+                          <label for="">Last name</label>
+                          <input class="w-100" type="text" placeholder="Galt">
+                      </div>
+                      <div class="input-div">
+                          <label for="">E-mail</label>
+                          <input class="w-100" type="email">
+                      </div>
+                      <div class="input-div">
+                          <label for="">Password</label>
+                          <input class="w-100 mb-1" type="password" placeholder="Minimum 8 characters">
+                          <p class="pass-disc">
+                              Use an uppercase character,  number and special character.
+                          </p>
+                      </div>
+                      <div class="input-div mb">
+                          <label for="">Re-enter password</label>
+                          <input class="w-100" type="password" placeholder="Minimum 8 characters">
+
+                      </div>
+
+                      <p class="text-center">
+                          <button class="sign-up-btn">
+                              Sign me up
+                          </button>
+                      </p>
+                  </form>
+              </div>
+          </div>
+          <div class="col-md-1">
+
+          </div>
+      </div>
+  </div>
+</div>

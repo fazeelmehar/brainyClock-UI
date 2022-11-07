@@ -1,0 +1,52 @@
+<nav class="d-flex align-items-center justify-content-between">
+  <div class="logo">
+    <a [routerLink]="[ '' ]">
+      <img src="assets/images/brainy-logo.png" alt="" class="logo-on-mbl"><img src="assets/images/brainyclock-logo.png"
+        alt="" class="logo-on-pc">
+    </a>
+  </div>
+
+  <ng-container *ngIf="!isMobile">
+    <ng-container *ngIf="!isLoggedIn.value; else elseTemplate">
+      <div (click)="ShowLogin()" class="login-txt nav-log-in login-toggle" id="login-toggle">
+        Log in
+      </div>
+      <div (click)="ShowSignup()" class="login-txt nav-sign-up sign-up-toggle" id="sign-up-toggle">
+        Sign up
+      </div>
+      <a href="freetrail.html" class="try-rectangle">
+        I want to try before I buy <span>→</span>
+      </a>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <p style="color: white;">
+        Hello, {{this.user.value.name}}
+      </p>
+    </ng-template>
+  </ng-container>
+
+
+  <div class="burger-menu" id="burger-menu">
+    <img src="assets/images/burger-menu.png" alt="" onclick="dropdown()" id="menu">
+  </div>
+  <!-- DROP DOWN MENU BAR ON MOBILE -->
+  <div class="drop-down-container" id="drop-down">
+    <ng-container *ngIf="isMobile">
+      <ng-container *ngIf="!isLoggedIn.value; else elseTemplate">
+        <p (click)="ShowLogin()" class="login-toggle"> Log in </p>
+        <p (click)="ShowSignup()" class="sign-up-toggle"> Sign up </p>
+        <a href="freetrail.html">
+          <p>I want to try before I buy. </p>
+        </a>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <p style="color: white;">
+          Hello, {{user.value.name}}
+        </p>
+      </ng-template>
+    </ng-container>
+  </div>
+</nav>
+
+<app-login (editedEmitter)="updateValueFromLogin($event)" [isShow]="isShowLogin"></app-login>
+<app-signup (editedEmitter)="updateValueSignup($event)" [isShow]="isShowSignup"></app-signup>

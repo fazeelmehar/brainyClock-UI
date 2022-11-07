@@ -1,0 +1,19 @@
+<footer>
+  <div class="mb-60">
+    <h2 class="headerr text-center">
+      Contactless. Secure. <br> Accurate.
+    </h2>
+  </div>
+
+  <div class="text-center">
+    <button (click)="Show()" class="btnn contact-btn mx-2 my-2 contact-toggle"> Contact Us</button>
+    <a [routerLink]="[ 'get-app']">
+      <button class=" btnn app-btn mx-2 my-2">Get the app</button>
+    </a>
+  </div>
+
+  <div class="hr">
+
+  </div>
+</footer>
+<app-contact (editedEmitter)="updateValue($event)" [isShow]="isShow"></app-contact>

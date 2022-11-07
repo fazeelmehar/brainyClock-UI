@@ -1,0 +1,73 @@
+<div [ngClass]="{'login-translate-0': isShow}" class="login" id="login">
+  <div class="position-relative">
+    <button (click)="Close()" class="page-remover border-0 bg-white p-1 back-btn">
+      <img src="assets/images/cross.png" alt="" class="cross-img w-100">
+      <img src="assets/images/back.png" alt="" class="back-img w-100">
+    </button>
+    <div class="login-container">
+      <h2 class="login-header">
+        Log in to your account.
+      </h2>
+
+      <img src="assets/images/google.png" alt="Conitnue with google" class="w-100">
+      <div class="option d-flex justify-content-between align-items-center">
+        <div class="w-25">
+          <img src="assets/images/line.png" alt="" class="w-100">
+        </div>
+        <p class="text-center mb-0 w-75">
+          Or log in with you email-ID
+        </p>
+        <div class="w-25">
+          <img src="assets/images/line.png" alt="" class="w-100">
+        </div>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="input-div">
+          <label for="">Email</label>
+          <input formControlName="email" class="w-100" type="email" placeholder="Email enter your email-ID"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be valid</div>
+          </div>
+        </div>
+        <div class="input-div">
+          <label for="">Password</label>
+          <input formControlName="password" class="w-100" type="password" placeholder="Type in your password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="remember d-flex align-items-center gap-1">
+            <div class="on-off-btn-box">
+              <div class="on-off-btn dot" id="dot">
+                <div class="on-off-dot toggle-btnn" id="toggle-btnn"></div>
+                <!-- <div class="on-off-dot toggle-btnn" id="toggle-btnn">&nbsp</div> -->
+              </div>
+            </div>
+            <div>
+              Remember me
+            </div>
+          </div>
+          <div (click)="showForgotPassword(true)" class="forgot forgot-password-toggle">
+            Forgot password?
+          </div>
+        </div>
+        <button class="login-btn" type="submit">Log in</button>
+
+        <div class="d-flex justify-content-around mt-3">
+          <p class="register">Not registered yet?
+          <p>
+          <p (click)="showSignup(true)" class="sign-upp sign-up-toggle" style="cursor: pointer;">Sign up here</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-forgotpassword (editedEmitter)="updateValueFromForgotPassword($event)" [isShow]="isShowForgotPassword">
+</app-forgotpassword>

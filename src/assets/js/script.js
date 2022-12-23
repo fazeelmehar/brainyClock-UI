@@ -128,5 +128,3 @@ for(btn of toggleremovebuttons){
     // navbar javascript Ends
     // navbar javascript Ends
     // navbar javascript Ends
-
-console.log(dott);

@@ -1,7 +1,14 @@
 <footer>
   <div class="mb-60">
     <h2 class="headerr text-center">
-      Contactless. Secure. <br> Accurate.
+      <ng-container *ngIf="!isMobile; else elseTemplate">
+        Contactless. Secure. Accurate.
+      </ng-container>
+      <ng-template #elseTemplate>
+        Contactless.<br />
+        Secure.<br />
+        Accurate.
+      </ng-template>
     </h2>
   </div>
 

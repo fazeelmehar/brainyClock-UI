@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AuthGuard } from '../auth/auth.guard';
 import { User } from '../model/user.model';
 import { HostListener } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,35 +14,30 @@ export class HeaderComponent implements OnInit {
   isMobile = false;
   isShowLogin = false;
   isShowSignup = false;
-  isLoggedIn : Observable<boolean>;
+  isLoggedIn: Observable<boolean>;
   screenWidth: number;
   user: Observable<User>;
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
     this.screenWidth = window.innerWidth;
-    if (window.innerWidth < 400)
+    if (window.innerWidth < 500)
       this.isMobile = true;
     else
       this.isMobile = false;
   }
 
-  constructor(private guard: AuthGuard) {
+  constructor(private guard: AuthGuard, private router: Router) {
     this.getScreenSize();
   }
 
   ngOnInit(): void {
-    debugger
     this.user = this.guard.UserInfo();
     this.isLoggedIn = this.guard.isUserAuthenticated();
-    // this.guard.UserInfo().subscribe(res => {
-    //   debugger
-    //   this.user = res;
-    // });
-    // this.guard.isUserAuthenticated().subscribe(res => {
-    //   debugger
-    //   this.isLoggedIn = res;
-    // });
+    this.isLoggedIn = this.guard.isUserAuthenticate;
+    this.guard.isUserAuthenticate.subscribe(data => {
+      this.user = this.guard.UserInfo();
+    })
   }
 
   ShowLogin() {

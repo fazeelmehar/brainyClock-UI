@@ -21,7 +21,10 @@
     "@angular/router": "~10.0.0-rc.4",
     "@auth0/angular-jwt": "^5.0.2",
     "jquery": "^3.6.1",
+    "ngx-spinner": "^10.0.1",
+    "ngx-toastr": "^14.1.0",
     "rxjs": "~6.5.5",
+    "toastr": "^2.1.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

@@ -1,63 +1,88 @@
 <div [ngClass]="{'contact-us-translate-0': isShow}" class="contact-us" id="contact-us">
   <div class="container">
-      <button type="button" (click)="Close()" class="page-remover border-0 bgc-purp p-1 back-btn">
-          <img  src="assets/images/cross.png" alt="" class="cross-img w-100">
-          <img src="assets/images/back.png" alt="" class="back-img w-100">
-      </button>
-      <div class="row">
-          <div class="col-md-1">
+    <button type="button" (click)="Close()" class="page-remover border-0 bgc-purp p-1 back-btn">
+      <img src="assets/images/cross.png" alt="" class="cross-img w-100">
+      <img src="assets/images/back.png" alt="" class="back-img w-100">
+    </button>
+    <div class="row">
+      <div class="col-md-1">
 
-          </div>
-          <div class="col-md-10">
-              <p class="contact-us-header">
-                  We’d love to hear <br> from you.
-              </p>
-          </div>
       </div>
-      <div class="row col-rev">
-          <div class="col-md-6">
-              <div class="contact-info">
-                  <div class="row">
-                      <div class="col-md-2 col-sm-2 col-2">
-                          <img src="assets/images/mail.png" alt="" width="20px" height="16px">
-                      </div>
-                      <div class="col-md-10 col-sm-10 col-10">
-                          info@brainyclock.com
-                      </div>
-                  </div>
-                  <div class="row mt-5">
-                      <div class="col-md-2 col-sm-2 col-2">
-                          <img src="assets/images/Vector.png" alt="" width="16px" height="20px">
-                      </div>
-                      <div class="col-md-10 col-sm-10 col-10">
-                          251 East 32nd Street <br>
-                          7C <br>
-                          NYC, NY 10016 <br>
-                          United States
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-6">
-              <div>
-                  <form action="" class="contact-form">
-                      <input type="text" placeholder="Your name">
-                      <input type="text" placeholder="Email address">
-                      <input type="text" placeholder="Organization">
-                      <textarea name="" id="" cols="30" rows="10"></textarea>
-                      <p class="contact-send-btn">
-                          <button class="btnn">Send</button>
-                      </p>
-                  </form>
-              </div>
-          </div>
+      <div class="col-md-10">
+        <p class="contact-us-header">
+          We’d love to hear <br> from you.
+        </p>
       </div>
-      <div class="row">
-          <div class="col-md-1">
+    </div>
+    <div class="row col-rev">
+      <div class="col-md-6">
+        <div class="contact-info">
+          <div class="row">
+            <div class="col-md-2 col-sm-2 col-2">
+              <img src="assets/images/mail.png" alt="" width="20px" height="16px">
+            </div>
+            <div class="col-md-10 col-sm-10 col-10">
+              info@brainyclock.com
+            </div>
           </div>
-          <div class="col-md-10">
+          <div class="row mt-5">
+            <div class="col-md-2 col-sm-2 col-2">
+              <img src="assets/images/Vector.png" alt="" width="16px" height="20px">
+            </div>
+            <div class="col-md-10 col-sm-10 col-10">
+              251 East 32nd Street <br>
+              7C <br>
+              NYC, NY 10016 <br>
+              United States
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+            <div>
+              <input formControlName="name" type="text" placeholder="Your name"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+            </div>
+            <div>
+              <input formControlName="email" type="text" placeholder="Email address"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">Email must be valid</div>
+              </div>
+            </div>
+            <div>
+              <input formControlName="organization" type="text" placeholder="Organization"
+              [ngClass]="{ 'is-invalid': submitted && f.organization.errors }" />
+              <div *ngIf="submitted && f.organization.errors" class="invalid-feedback">
+                <div *ngIf="f.organization.errors.required">Organization is required</div>
+              </div>
+            </div>
+            <div>
+              <textarea formControlName="message" name="" id="" cols="30" rows="10"
+              [ngClass]="{ 'is-invalid': submitted && f.message.errors }"></textarea>
+              <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+                <div *ngIf="f.message.errors.required">Message is required</div>
+              </div>
+            </div>
+            <p class="contact-send-btn">
+              <button type="submit" class="btnn">Send</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10">
 
-          </div>
       </div>
+    </div>
   </div>
 </div>

@@ -7,6 +7,8 @@ import { AuthenticatedResponse } from "../../model/AuthenticationModel.model";
 import { User } from 'src/app/model/user.model';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-login',
@@ -17,11 +19,13 @@ export class LoginComponent implements OnInit {
   @Input() isShow: boolean;
   @Output() editedEmitter = new EventEmitter<{}>();
   isShowForgotPassword = false;
+  isShowSignup = false;
   loginForm: FormGroup;
   submitted = false;
 
 
-  constructor(private guard: AuthGuard, private router: Router, private formBuilder: FormBuilder, private repo: RepositoryService) { }
+  constructor(private toastr: ToastrService, private guard: AuthGuard, private router: Router, private formBuilder: FormBuilder, private repo: RepositoryService
+    , private spinner: SpinnerService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -36,6 +40,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    this.spinner.show();
     this.repo.post('company/login', this.loginForm.value)
       .pipe(first())
       .subscribe(
@@ -43,23 +48,27 @@ export class LoginComponent implements OnInit {
           const res: any = data;
           localStorage.setItem("jwt", res.data.access_token);
           localStorage.setItem("user", JSON.stringify(res.data));
-          debugger
           this.guard.isUserAuthenticated().next(true);
           this.guard.UserInfo().next(<User>JSON.parse(JSON.stringify(res.data)));
           this.Close();
+          this.router.navigate(['']);
+          this.spinner.hide();
         },
         error => {
-          window.alert(error.error.returnMessage[0]);
-          // this.toastr.error(error.error.returnMessage[0], 'Error');
+          this.spinner.hide();
+          this.Close();
+          this.toastr.success(error.error.msg);
         });
 
   }
 
   Close() {
     this.isShow = false;
+    this.submitted = false;
     this.editedEmitter.emit({ login: this.isShow });
   }
   showSignup(val: boolean) {
+    this.isShowSignup = val;
     this.editedEmitter.emit({ login: false, signup: val });
   }
   showForgotPassword(val: boolean) {
@@ -71,5 +80,8 @@ export class LoginComponent implements OnInit {
     this.isShow = val.login;
     if (val.login != undefined)
       this.editedEmitter.emit({ login: val.login });
+  }
+  updateValueSignup(val: boolean) {
+    this.isShowSignup = val;
   }
 }

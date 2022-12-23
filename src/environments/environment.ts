@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  appUrl : "https://gb9d473w51.execute-api.us-east-1.amazonaws.com/api"
+  appUrl : "https://5g9kqnv2aa.execute-api.us-east-1.amazonaws.com/api"
 };
 
 /*

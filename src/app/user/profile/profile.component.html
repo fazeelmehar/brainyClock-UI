@@ -1,0 +1,56 @@
+<div class="user-profile-change-password-container">
+  <!-- <nav class="d-flex align-items-center justify-content-between">
+    <div class="logo">
+      <img src="assets/images/brainy-logo.png" alt="" class="logo-on-mbl"><img src="assets/images/brainyclock-logo.png"
+        alt="" class="logo-on-pc">
+    </div>
+    <div class="burger-menu" id="burger-menu">
+      <img src="assets/images/burger-menu.png" alt="" onclick="dropdown()" id="menu">
+    </div>
+
+    <div class="user">
+      Hello! Samantha
+    </div>
+
+    <div class="drop-down-container" id="drop-down">
+      <p onclick="openSubscription()"> My subscriptions </p>
+      <p onclick="openPaymentDetails()"> Payment details </p>
+      <p onclick="openTransactionHistory()"> Transaction history </p>
+      <p onclick="openPasswordSection()"> Change password </p>
+    </div>
+  </nav>
+
+   -->
+
+
+  <div class="user-profile-bg">
+
+
+    <div class="mid-body-of-user-profile">
+      <div class="user-profile-sections">
+        <div [ngClass]="{'selected-section': tab == 'my-subscriptions'}" class="sec-options" (click)="openSubscription()" id="my-subs">My subscriptions</div>
+
+        <div [ngClass]="{'selected-section': tab == 'payment-details'}" class="sec-options" (click)="openPaymentDetails()" id="pay-dets">Payment details</div>
+
+        <div [ngClass]="{'selected-section': tab == 'transaction-history'}" class="sec-options" (click)="openTransactionHistory()" id="tran-hist">Transaction history</div>
+
+        <div [ngClass]="{'selected-section': tab == 'change-password'}" class="sec-options " (click)="openPasswordSection()" id="change-password">Change password
+        </div>
+      </div>
+      <div *ngIf="tab == 'change-password'" class="change-password-container" id="my-Pass">
+        <app-changepassword></app-changepassword>
+      </div>
+      <div *ngIf="tab == 'my-subscriptions'" id="my-subscription"
+        class="enterprisee-container">
+        <app-mysubscriptions></app-mysubscriptions>
+      </div>
+      <div *ngIf="tab == 'payment-details'" id="my-details" class="">
+        <app-paymentdetails></app-paymentdetails>
+      </div>
+      <div *ngIf="tab == 'transaction-history'" id="my-history" class="">
+        <app-transactionhistory></app-transactionhistory>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EnvironmentUrlService } from './environment-url.service';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RepositoryService {
 
-  constructor(private http: HttpClient, private envUrl: EnvironmentUrlService) { }
+  constructor(private auth: AuthGuard, private http: HttpClient, private envUrl: EnvironmentUrlService) { }
 
   public getData = (route: string, id?: number) => {
     if (id) {
@@ -33,8 +34,16 @@ export class RepositoryService {
     return `${envAddress}/${route}`;
   }
   private generateHeaders = () => {
-    return {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
+    if (this.auth.isSignedIn())
+      return {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+      };
+    else
+      return {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+      };
   }
 }

@@ -1,0 +1,51 @@
+<div class="mainn">
+  <div class="thirtydaystrial position-relative">
+    <div class="container px-0">
+      <div class="row">
+        <div class="col-lg-7 col-12">
+          <p *ngIf="!packageService.isTrial.value" class="enjoy">Your purchase has been <br> completed successfully!</p>
+          <p *ngIf="packageService.isTrial.value" class="enjoy">Enjoy the next 30 days of your free trial!</p>
+          <p class="sent">
+            A confirmation mail will be sent on your registered email ID. For any queries, <br> write to us at <a
+              class="info" href="mailto:info@brainyclock.com"><span
+                style="text-decoration: underline;color: white;">info@brainyclock.com</span></a> <br>
+            <ng-container *ngIf="packageService.isTrial.value">
+              Paid subscription starts when the trial ends, unless you cancel by <br>
+              11 November 2022
+            </ng-container>
+
+          </p>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-12">
+              <p class="order">Order summary</p>
+            </div>
+            <div class="col-md-6">
+              <p class="detail"><a class="view cpointer" (click)="gotoOrderDetail()">View details</a></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-6 padd-rit-0">
+              <p *ngIf="!packageService.isTrial.value" class="number numberr">Order total :</p>
+              <p class="number">Order number :</p>
+              <p class="number">Payment method :</p>
+              <p class="number">Billing type :</p>
+
+            </div>
+            <div class="col-lg-6 col-6 padd-left-0">
+              <p *ngIf="!packageService.isTrial.value" class="number cpk align-right">${{packageService.pacakeFinalPrice(packageService.packageType.value)}}</p>
+              <p class="number align-right">CPKL234PRE12234</p>
+              <p class="number align-right">Credit card</p>
+              <p class="number align-right">{{packageService.isTrial.value?'Monthly subscription, billed annually':'Annual subscription'}}</p>
+            </div>
+          </div>
+          <div class="home-page-buttton">
+            <button (click)="backToHome()" class="homepagebtn">Back to homepage</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-fix">
+      <img src="assets/images/trailbgb.png" alt="" width="100%">
+    </div>
+  </div>
+</div>

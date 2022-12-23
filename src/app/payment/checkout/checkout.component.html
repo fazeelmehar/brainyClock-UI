@@ -1,0 +1,110 @@
+<div class="maiinn">
+  <div class="container checkout-trail-container">
+    <div class="row mt-5">
+      <div class="col-lg-6">
+        <div class="enterprise">
+          <p class="plann">
+            {{packageService.getPackageName(packageService.packageType.value)}} plan
+          </p>
+          <p *ngIf="packageService.isTrial.value" class="days">
+            Free trial for 30 days
+          </p>
+
+          <div class="colors">
+            <p>{{packageService.get(packageService.packageType.value).users}} users</p>
+            <p class="employ">{{packageService.get(packageService.packageType.value).employees}} employees</p>
+            <p class="employ">{{packageService.get(packageService.packageType.value).location}} location</p>
+          </div>
+
+          <p class="paraa">
+            Get a feel for the product with the Free plan, <br> and when you are ready, simply upgrade your subscription
+            with one of the available plans.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-1 col-12">
+        <div class="arroww">
+            <img (click)="backToHome()" class="arrow mt-3" src="assets/images/white-back.png" alt="">
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="order mt-0">
+          <span class="ord-summ">Order summary</span>
+          <ng-container *ngIf="!packageService.isTrial.value; else elseTemplate">
+            <ul style="list-style: none">
+              <li>
+                <span >
+                  {{packageService.getPackageName(packageService.packageType.value)}} subscription Plan:
+                </span>
+                <span  style="float: right;">
+                  ${{packageService.get(packageService.packageType.value).price}} / month
+                </span>
+              </li>
+              <li>
+                <span>
+                  Billing Type:
+                </span>
+                <span style="float: right;">
+                  Annal subscription
+                </span>
+              </li>
+              <li>
+                <span>
+                  Date of purchase:
+                </span>
+                <span style="float: right;">
+                  {{packageService.dateOfPurchase() | date: 'dd MMMM yyyy' }}
+                </span>
+              </li>
+              <li>
+                <span>
+                  subscription valid till:
+                </span>
+                <span style="float: right;">
+                  {{packageService.subscriptionValidTill() | date: 'dd MMMM yyyy' }}
+                </span>
+              </li>
+            </ul>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <ul>
+              <li>You have opted for a free trial of our
+                {{packageService.getPackageName(packageService.packageType.value)}} subscription.</li>
+              <li> Paid subscription starts when the trial ends, unless you cancel by {{packageService.trialTill() | date: 'dd MMMM yyyy' }}.</li>
+              <li> Credit card is required for future billing. </li>
+              <li>Trial includes the same features as the paid product.</li>
+            </ul>
+          </ng-template>
+
+          <hr>
+          <div>
+            <div class="col-lg-12 col-12">
+              <div class="row">
+                <div class="col-lg-2 col-6">
+                  <div class="total">Total:</div>
+                </div>
+                <div class="col-lg-2 col-6">
+                  <div class="total final t-right">${{packageService.pacakeFinalPrice(packageService.packageType.value)}}</div>
+                </div>
+                <div *ngIf="packageService.isTrial.value" class="col-lg-8 col-12">
+                  <div class="billed">for 30 days, and thereafter ${{packageService.get(packageService.packageType.value).price}}/month, billed annually.</div>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                  <div class="buttton-container">
+                    <button (click)="proceedToPay()" class="buttton">Proceed to pay</button>
+                  </div>
+                  <div class="buttton-container">
+                    <button (click)="backToHome()" class="prev-page-btn">Previous page</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

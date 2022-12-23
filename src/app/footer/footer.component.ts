@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -6,7 +6,21 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  constructor() { }
+  isMobile = false;
+  screenWidth: number;
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.screenWidth = window.innerWidth;
+    if (window.innerWidth < 500)
+      this.isMobile = true;
+    else
+      this.isMobile = false;
+  }
+  constructor() {
+    this.getScreenSize();
+  }
+
   isShow = false;
   ngOnInit(): void {
   }
